@@ -54,6 +54,10 @@ cot::usage = "Inert cotangent function";
 sec::usage = "Inert secant function";
 csc::usage = "Inert cosecant function";
 
+(* Print packages being loaded if $DebugPrint is True*)
+$DebugPrint = True;
+DebugPrint[x_] := If[$DebugPrint == True, Print[x]];
+
 (* ::Section::Closed:: *)
 (* Implementation *)
 
@@ -67,16 +71,16 @@ Print["Loading " <> $RubiVersion <> " will take a minute or two. In the future t
 $ruleDir = FileNameJoin[{$rubiDir, "IntegrationRules"}];
 $utilityPackage = FileNameJoin[{$rubiDir, "IntegrationUtilityFunctions.m"}];
 
-RubiClearMemoryImages[] := 
+RubiClearMemoryImages[] :=
   Module[{files = FileNames["*.mx", {FileNameJoin[{$rubiDir, "Kernel"}]}]},
   Map[DeleteFile,files]]
 
 LoadRules::inv = "Could not load file or section: ``";
 LoadRules[fileName_String /; FileExtension[fileName] =!= "m"] := LoadRules[FileNameJoin[{$ruleDir, fileName <> ".m"}]];
 LoadRules[fileName_String /; FileExistsQ[fileName]] := (
-  Print["Loading " <> FileBaseName@fileName <> ".m..."];
+  DebugPrint["Loading " <> FileBaseName@fileName <> ".m..."];
   Get[fileName];
-  Print[""] );
+  DebugPrint[""] );
 LoadRules[arg___] := Message[LoadRules::inv, {arg}];
 
 (* ::Section::Closed:: *)
