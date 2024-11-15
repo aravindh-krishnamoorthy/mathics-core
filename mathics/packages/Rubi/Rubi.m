@@ -10,7 +10,6 @@
 (* :Mathematica Version: 7+ *)
 (* :Copyright: (c) 2018-2019 Rule-based Integration Organization (https://rulebasedintegration.org/) *)
 
-
 (* ::Title:: *)
 (*Rubi (Rule-Based Integrator) Package*)
 
@@ -75,12 +74,10 @@ RubiClearMemoryImages[] :=
 LoadRules::inv = "Could not load file or section: ``";
 LoadRules[fileName_String /; FileExtension[fileName] =!= "m"] := LoadRules[FileNameJoin[{$ruleDir, fileName <> ".m"}]];
 LoadRules[fileName_String /; FileExistsQ[fileName]] := (
-  StatusBarPrint["Loading " <> FileBaseName@fileName <> ".m..."];
+  Print["Loading " <> FileBaseName@fileName <> ".m..."];
   Get[fileName];
-  StatusBarPrint[""] );
+  Print[""] );
 LoadRules[arg___] := Message[LoadRules::inv, {arg}];
-
-StatusBarPrint[message_String] := If[$Notebooks, CurrentValue[EvaluationNotebook[], WindowStatusArea] = message]
 
 (* ::Section::Closed:: *)
 (* Load Integration Rules *)
@@ -95,6 +92,7 @@ LoadRules[FileNameJoin[{"1 Algebraic functions", "1.1 Binomial products", "1.1.1
 LoadRules[FileNameJoin[{"1 Algebraic functions", "1.1 Binomial products", "1.1.1 Linear", "1.1.1.3 (a+b x)^m (c+d x)^n (e+f x)^p"}]];
 LoadRules[FileNameJoin[{"1 Algebraic functions", "1.1 Binomial products", "1.1.1 Linear", "1.1.1.4 (a+b x)^m (c+d x)^n (e+f x)^p (g+h x)^q"}]];
 
+(*
 LoadRules[FileNameJoin[{"1 Algebraic functions", "1.1 Binomial products", "1.1.2 Quadratic", "1.1.2.1 (a+b x^2)^p"}]];
 LoadRules[FileNameJoin[{"1 Algebraic functions", "1.1 Binomial products", "1.1.2 Quadratic", "1.1.2.2 (c x)^m (a+b x^2)^p"}]];
 LoadRules[FileNameJoin[{"1 Algebraic functions", "1.1 Binomial products", "1.1.2 Quadratic", "1.1.2.3 (a+b x^2)^p (c+d x^2)^q"}]];
@@ -175,6 +173,7 @@ LoadRules[FileNameJoin[{"1 Algebraic functions", "1.3 Polynomial products", "1.3
 
 LoadRules[FileNameJoin[{"1 Algebraic functions", "1.4 Miscellaneous", "1.4.3 Miscellaneous algebraic functions"}]];
 LoadRules[FileNameJoin[{"9 Miscellaneous", "9.2 Piecewise linear functions"}]];
+*)
 
 (* ::Section:: *)
 (* Define Unintegrable and CannotIntegrate*)
@@ -198,7 +197,7 @@ Unintegrable[u_, x_] :=
 
 
 CannotIntegrate[u_, x_] := Defer[Int][u, x];
-StatusBarPrint[""];
+Print[""];
 
 End[];
 EndPackage[];
