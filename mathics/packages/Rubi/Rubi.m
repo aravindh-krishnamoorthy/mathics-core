@@ -54,14 +54,14 @@ cot::usage = "Inert cotangent function";
 sec::usage = "Inert secant function";
 csc::usage = "Inert cosecant function";
 
-(* Print packages being loaded if $DebugPrint is True*)
-$DebugPrint = True;
-DebugPrint[x_] := If[$DebugPrint == True, Print[x]];
-
 (* ::Section::Closed:: *)
 (* Implementation *)
 
 Begin["`Private`"];
+
+(* Print packages being loaded if $DebugPrint is True*)
+$DebugPrint = True;
+DebugPrint[x_] := If[$DebugPrint == True, Print[x]];
 
 $rubiDir = Directory[];
 
